@@ -4,83 +4,74 @@ using UnityEngine;
 
 public class BallPosition : MonoBehaviour
 {
-    public Transform ballDest;
-    public GameObject ball;
+    float throwforce = 600;
+    Vector3 objectPos;
+    float distance;
 
-    public float ballforce = 5f;
-    public float ballDistance = 2f;
+    public bool canHold = true;
+    public GameObject item;
+    public GameObject tempParent;
+    public bool isHolding;
 
-    private bool holdingBall = false;
-
-
-
-
-
-    void Update()
+    public void Update()
     {
-        if (Input.GetMouseButton(0))
+        distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
+
+        if (distance >= 10f)
         {
-
-            holdingBall = true;
-            GetComponent<Rigidbody>().useGravity = false;
-            this.transform.position = ballDest.position;
-            this.transform.parent = GameObject.Find("BallPosition").transform;
-
+            isHolding = false;
 
         }
-       else if (Input.GetMouseButtonDown(1))
-        {
-            holdingBall = true;
-            GetComponent<Rigidbody>().useGravity = false;
-            GetComponent<Rigidbody>().AddForce(Vector3.forward * ballforce);
-        }
 
+   
+        if(isHolding==true)
+        {
+
+            item.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            item.transform.SetParent(tempParent.transform);
+
+
+            if(Input.GetMouseButtonDown(1))
+            {
+                item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwforce);
+                 isHolding = false;
+
+            }
+        }
         else
         {
-            holdingBall = false;
-            this.transform.parent = null;
 
-            GetComponent<Rigidbody>().useGravity = true;
-
-           
-            
+            objectPos = item.transform.position;
+            item.transform.SetParent(null);
+            item.GetComponent<Rigidbody>().useGravity = true;
+            item.transform.position = objectPos;
 
         }
-          
-       
-
-               
-
-
         
     }
 
-    void OnCollisionEnter(Collision col)
+    private void OnMouseDown()
     {
-        if(col.gameObject.name == "Terrain" )
+        if (distance <= 10f)
         {
-            GetComponent<Rigidbody>().Sleep();
 
+
+
+
+            isHolding = true;
+            item.GetComponent<Rigidbody>().useGravity = false;
+            item.GetComponent<Rigidbody>().detectCollisions = true;
         }
-
+        
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    private void OnMouseUp()
+    void OnMouseUp()
     {
 
-       
-
-        GetComponent<Rigidbody>().AddForce(Vector3.forward);
+        isHolding = false;
+        
     }
+
+
 }
