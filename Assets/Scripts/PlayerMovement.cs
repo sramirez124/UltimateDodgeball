@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public CharacterController controller;
+    public Animator anim;
 
     public float speed = 10f;
     public float gravity = -9.81f;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("vertical", Input.GetAxis("Vertical"));
         isGrounded = Physics.CheckSphere(terrain.position, groundDistance, groundMask);
 
 
