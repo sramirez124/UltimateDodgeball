@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dash : AdvancedMovement
+public class Dash : MonoBehaviour
 {
-    [SerializeField] private float dashForce;
-    [SerializeField] private float dashDuration;
+    PlayerMovement moveScript;
+
+    public float dashForce;
+    public float dashDuration;
 
     private CharacterController cc;
 
     private void Awake()
     {
-        cc = GetComponent<CharacterController>();
+        moveScript = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -25,12 +27,15 @@ public class Dash : AdvancedMovement
         }
     }
 
-    public override IEnumerator Cast()
+    public IEnumerator Cast()
     {
-        cc.attachedRigidbody.AddForce(Camera.main.transform.forward * dashForce, ForceMode.VelocityChange);
+        float startTime = Time.time;
 
-        yield return new WaitForSeconds(dashDuration);
+        while(Time.time < startTime + dashDuration)
+        {
+            moveScript.controller.Move(moveScript.velocity * moveScript.speed * Time.deltaTime);
 
-        cc.attachedRigidbody.velocity = Vector3.zero;
+             yield return null;
+        }
     }
 }

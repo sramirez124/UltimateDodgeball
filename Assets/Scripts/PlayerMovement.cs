@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform terrain;
 
-    Vector3 velocity;
+    public Vector3 velocity;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if(Input.GetButtonDown("Jump") && isGrounded )
+        if(Input.GetButtonDown("Jump") /*&& isGrounded*/ )
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
