@@ -127,6 +127,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1528823500}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1069100785 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2391837782760779790, guid: 3f95fdf5b84b44540ab0cc17ef9c348c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1779875299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1176254673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2657379187109307075, guid: 4e3ebea234b9654489a0663da5f28fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1528823500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1176254674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176254673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0341a099b2f2a694c853444fd3929f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1176254675}
+  speed: 10
+  gravity: -9.81
+  jumpHeight: 3
+  terrain: {fileID: 1069100785}
+  velocity: {x: 0, y: 0, z: 0}
+  groundCheck: {fileID: 1536153986}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!143 &1176254675 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 2657379187109307074, guid: 4e3ebea234b9654489a0663da5f28fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1528823500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1176254676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176254673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97267434c3e93ac499cd1e3186dfef70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1214385917
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,8 +192,9 @@ GameObject:
   - component: {fileID: 1214385921}
   - component: {fileID: 1214385920}
   - component: {fileID: 1214385919}
-  - component: {fileID: 1214385918}
   - component: {fileID: 1214385923}
+  - component: {fileID: 1214385924}
+  - component: {fileID: 1214385918}
   m_Layer: 0
   m_Name: Dodgeball
   m_TagString: Untagged
@@ -157,13 +211,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1214385917}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 580769b87e59aa74b95ae7f2cb98a13f, type: 3}
+  m_Script: {fileID: 11500000, guid: 120a5c374035ee1409127e30af2baaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballDest: {fileID: 1392996594}
-  ball: {fileID: 1214385917}
-  ballforce: 5
-  ballDistance: 2
+  testDummy: {fileID: 0}
+  scoreText: {fileID: 0}
+  hitPlayer: 0
 --- !u!135 &1214385919
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -254,6 +307,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1214385924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214385917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canHold: 1
+  item: {fileID: 1214385917}
+  tempParent: {fileID: 1392996593}
+  isHolding: 0
+  holdText: {fileID: 0}
 --- !u!1 &1392996593
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,12 +347,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392996593}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2881565, y: 0, z: 2.1686115}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.21815652, y: -1.67, z: 2.1786115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 522239919}
-  m_RootOrder: 3
+  m_Father: {fileID: 1528823501}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1528823500
 PrefabInstance:
@@ -356,8 +426,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPerson (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2657379187109307072, guid: 4e3ebea234b9654489a0663da5f28fe5, type: 3}
+    - {fileID: 2657379187764312959, guid: 4e3ebea234b9654489a0663da5f28fe5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4e3ebea234b9654489a0663da5f28fe5, type: 3}
+--- !u!4 &1528823501 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2657379187764312944, guid: 4e3ebea234b9654489a0663da5f28fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1528823500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1536153986 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2657379186834912938, guid: 4e3ebea234b9654489a0663da5f28fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1528823500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1556900525
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,3 +609,23 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1779875299}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2132835306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2657379187764312949, guid: 4e3ebea234b9654489a0663da5f28fe5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1528823500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2132835307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132835306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72ed032cdcfa8245b479e4aa515f757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 100
+  playerBody: {fileID: 522239919}
