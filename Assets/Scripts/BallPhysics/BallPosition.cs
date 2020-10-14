@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BallPosition : MonoBehaviour
 {
-    float throwforce = 600;
+    [SerializeField] private float throwforce = 600; //showing in inspector for testing purposes
     Vector3 objectPos;
     float distance;
 
