@@ -49,6 +49,7 @@ public class BallPosition : MonoBehaviour
                  isHolding = false;
                 item.GetComponent<Rigidbody>().AddForce(Vector3.down * downScale);
                 //holdText.text = "Ball was Thrown...";
+                Debug.Log("Ball Thrown");
 
             }
         }
@@ -72,7 +73,7 @@ public class BallPosition : MonoBehaviour
         {
            
 
-
+            Debug.Log("Holding Ball");
             //holdText.text = "Holding a ball..";
 
             isHolding = true;
