@@ -94,7 +94,7 @@ public class MainMenu1 : MonoBehaviourPunCallbacks
 
             Debug.Log("Match is ready to begin");
 
-            PhotonNetwork.LoadLevel("TestScene");
+            PhotonNetwork.LoadLevel("Stadium");
 
         }
     }

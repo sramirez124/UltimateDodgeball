@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
 
     public CharacterController controller;
@@ -30,16 +31,32 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         isGrounded = Physics.CheckSphere(terrain.position, groundDistance, groundMask);
 
 
-        if(isGrounded && velocity.y < 0)
+       // if (photonView.IsMine)
+       // {
+            takeInput();
+
+            
+
+
+
+
+      //  }
+
+    }
+    private void takeInput()
+    {
+
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
 
         }
 
-        if(Input.GetButtonDown("Jump") /*&& isGrounded*/ )
+        if (Input.GetButtonDown("Jump") /*&& isGrounded*/ )
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
