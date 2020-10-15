@@ -127,6 +127,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1528823500}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &822109705
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 522239919}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.045193672
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91089183
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01978648
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d01011c3a715b644986cffff8d3ffb0a,
+        type: 3}
+      propertyPath: m_Name
+      value: Tposemodel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d01011c3a715b644986cffff8d3ffb0a, type: 3}
 --- !u!4 &1069100785 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2391837782760779790, guid: 3f95fdf5b84b44540ab0cc17ef9c348c,
@@ -152,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1176254675}
+  anim: {fileID: 0}
   speed: 10
   gravity: -9.81
   jumpHeight: 3
@@ -180,6 +250,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97267434c3e93ac499cd1e3186dfef70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1176254677
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176254673}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a17b381178c9d004485d4740b976d01a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1214385917
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwforce: 600
   canHold: 1
   item: {fileID: 1214385917}
   tempParent: {fileID: 1392996593}
