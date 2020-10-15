@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: 572f7f6eb7e8b2340a810a218411dd5b
+  - enabled: 1
+    path: Assets/Scenes/Stadium.unity
+    guid: de7b82d2fe29768478a7b2a677a6a360
   m_configObjects: {}
