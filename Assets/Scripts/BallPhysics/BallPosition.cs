@@ -14,8 +14,8 @@ public class BallPosition : MonoBehaviour
     // a return point to a dodge ball. It seems like the easiest way to do so.
     /// </summary>
 
-    [SerializeField] private GameObject outOfBoundsColliderBlue;
-    [SerializeField] private GameObject outOfBoundsColliderRed;
+    //[SerializeField] private GameObject outOfBoundsColliderBlue;
+    //[SerializeField] private GameObject outOfBoundsColliderRed;
 
     [SerializeField] private GameObject blueSpawn;
     [SerializeField] private GameObject redSpawn;
