@@ -9,6 +9,19 @@ public class BallPosition : MonoBehaviour
     Vector3 objectPos;
     float distance;
 
+    /// <summary>
+    // These variables take the position of the return points and in the inspector we assign
+    // a return point to a dodge ball. It seems like the easiest way to do so.
+    /// </summary>
+
+    [SerializeField] private GameObject outOfBoundsColliderBlue;
+    [SerializeField] private GameObject outOfBoundsColliderRed;
+
+    [SerializeField] private GameObject blueSpawn;
+    [SerializeField] private GameObject redSpawn;
+
+    private Rigidbody ball_RigidBody;
+
     //gravity force when thrown
     float downScale = 50f;
 
@@ -90,5 +103,22 @@ public class BallPosition : MonoBehaviour
         
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "BlueReturn")
+        {
+            Debug.Log("Blue return hit");
+            this.transform.position = new Vector3(blueSpawn.transform.position.x, blueSpawn.transform.position.y, blueSpawn.transform.position.z);
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        }
 
+        if (collision.collider.tag == "RedReturn")
+        {
+            Debug.Log("Red return hit");
+            this.transform.position = new Vector3(redSpawn.transform.position.x, redSpawn.transform.position.y, redSpawn.transform.position.z);
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        }
+    }
 }
