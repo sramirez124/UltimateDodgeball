@@ -15,7 +15,7 @@ public class HitDetection : MonoBehaviour
 
         if(hit.collider.tag == "Player")
         {
-            scoreText.text = (hitPlayer + 1).ToString();
+            //scoreText.text = (hitPlayer + 1).ToString();
             Destroy(testDummy);
 
         }
