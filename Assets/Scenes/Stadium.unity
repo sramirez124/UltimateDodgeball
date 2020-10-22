@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 500
+  throwforce: 3000
   blueSpawn: {fileID: 1401760001}
   redSpawn: {fileID: 68928127}
   canHold: 1
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 500
+  throwforce: 3000
   blueSpawn: {fileID: 1998171013}
   redSpawn: {fileID: 489139262}
   canHold: 1
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 500
+  throwforce: 3000
   blueSpawn: {fileID: 995764752}
   redSpawn: {fileID: 804461342}
   canHold: 1
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 500
+  throwforce: 3000
   blueSpawn: {fileID: 406846324}
   redSpawn: {fileID: 1880543804}
   canHold: 1
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 500
+  throwforce: 3000
   blueSpawn: {fileID: 413852340}
   redSpawn: {fileID: 1281256240}
   canHold: 1
@@ -2006,7 +2006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 500
+  throwforce: 3000
   blueSpawn: {fileID: 1135815150}
   redSpawn: {fileID: 1413241401}
   canHold: 1
