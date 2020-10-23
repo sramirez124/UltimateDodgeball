@@ -54,7 +54,6 @@ public class AnimatorState : MonoBehaviour
             animator.SetBool("dodge", false);
         }
 
-
         if (Input.GetKey("e"))
         {
             animator.SetTrigger("pickup");
@@ -64,6 +63,7 @@ public class AnimatorState : MonoBehaviour
         {
             animator.SetTrigger("throw");
         }
+
 
     }
 }
