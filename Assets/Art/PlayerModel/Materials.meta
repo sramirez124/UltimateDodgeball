@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 08e8b2c86c70dae45bd81eb5bc47a345
+=======
+<<<<<<< HEAD:Assets/Animation.meta
+guid: 9854cd387c348cf41a93883c2c84972e
+=======
+guid: b632ad5f2da75f24fb49264318db5622
+>>>>>>> d5e93a87bc4cec0b39edeee8c7437cf76d7ab31c:Assets/Art/PlayerModel/Materials.meta
+>>>>>>> d5e93a87bc4cec0b39edeee8c7437cf76d7ab31c
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

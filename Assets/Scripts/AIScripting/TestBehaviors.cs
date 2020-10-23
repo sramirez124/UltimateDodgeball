@@ -6,7 +6,7 @@ using System.Collections;
 
 public class TestBehaviors : MonoBehaviour
 {
-
+    //referenced from Ezzerland May 16,2011
 
 
     //Inspector initiated variables. Defaults are set for ease of use.
@@ -63,6 +63,10 @@ public class TestBehaviors : MonoBehaviour
 
     public Transform target; //The target, or whatever the AI is looking for.
 
+    public Transform ballTransform;
+
+
+
 
 
 
@@ -117,6 +121,10 @@ public class TestBehaviors : MonoBehaviour
 
     private bool smoothAttackRangeBuffer = false; //for runAway AI to not be so messed up by their visual radius and attack range.
 
+    private float lookRadius = 8f;
+
+
+
 
 
 
@@ -126,6 +134,7 @@ public class TestBehaviors : MonoBehaviour
 
     void Start()
     {
+        
 
         StartCoroutine(Initialize()); //co-routine is used incase you need to interupt initiialization until something else is done.
 
@@ -170,6 +179,13 @@ public class TestBehaviors : MonoBehaviour
         }
         else
         {
+            float distance = Vector3.Distance(ballTransform.position, transform.position);
+
+            if (distance <= lookRadius)
+            {
+                ballTransform.position = transform.position;
+                Debug.Log("AI picked up ball.");
+            }
 
             AIFunctionality();
 
@@ -1005,9 +1021,13 @@ public class TestBehaviors : MonoBehaviour
         }
 
     }
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
 
 
 }
 
-//Megagamefan100, Jul 28, 2014#6
+
