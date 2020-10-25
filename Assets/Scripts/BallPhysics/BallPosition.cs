@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BallPosition : MonoBehaviour
 {
-    [SerializeField] private float throwforce = 600; //showing in inspector for testing purposes
+    [SerializeField] public float throwforce = 600; //showing in inspector for testing purposes
     Vector3 objectPos;
     float distance;
 
@@ -23,7 +23,7 @@ public class BallPosition : MonoBehaviour
     private Rigidbody ball_RigidBody;
 
     //gravity force when thrown
-    float downScale = 50f;
+    public float downScale = 50f;
 
     public bool canHold = true;
     public GameObject item;

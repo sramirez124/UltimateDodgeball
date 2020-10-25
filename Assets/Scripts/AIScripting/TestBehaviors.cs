@@ -13,17 +13,10 @@ public class TestBehaviors : MonoBehaviour
 
     public bool on = true; //Is the AI active? this can be used to place pre-set enemies in you scene.
 
-    public bool canFly = false; //Flying alters float behavior to ignore gravity. The enemy will fly up or down only to sustain floatHeight level.
-
-    public float floatHeight = 0.0f; //If it can fly/hover, you need to let the AI know how high off the ground it should be.
 
     public bool runAway = false; //Is it the goal of this AI to keep it's distance? If so, it needs to have runaway active.
 
     public bool runTo = false; //Opposite to runaway, within a certain distance, the enemy will run toward the target.
-
-    public float runDistance = 25.0f; //If the enemy should keep its distance, or charge in, at what point should they begin to run?
-
-    public float runBufferDistance = 50.0f; //Smooth AI buffer. How far apart does AI/Target need to be before the run reason is ended.
 
     public int walkSpeed = 10; //Standard movement speed.
 
@@ -55,15 +48,17 @@ public class TestBehaviors : MonoBehaviour
 
     public float huntingTimer = 5.0f; //Search for player timer in seconds. Minimum of 0.1
 
-    public bool estimateElevation = false; //This implements a pause between raycasts for heights and guestimates the need to move up/down in height based on the previous raycast.
-
-    public float estRayTimer = 1.0f; //The amount of time in seconds between raycasts for gravity and elevation checks.
-
     public bool requireTarget = true; //Waypoint ONLY functionality (still can fly and hover).
 
     public Transform target; //The target, or whatever the AI is looking for.
 
-    public Transform ballTransform;
+    public GameObject ball;
+
+    public GameObject ballPosition;
+
+    public GameObject[] enemies;
+
+
 
 
 
@@ -103,12 +98,6 @@ public class TestBehaviors : MonoBehaviour
 
     private float gravity = 20.0f; //force of gravity pulling the enemy down.
 
-    private float antigravity = 2.0f; //force at which floating/flying enemies repel
-
-    private float estHeight = 0.0f; //floating/flying creatures using estimated elevation use this to estimate height necessities and gravity impacts.
-
-    private float estGravityTimer = 0.0f; //floating/flying creatures using estimated elevation will use this to actually monitor time values.
-
     private int estCheckDirection = 0; //used to determine if AI is falling or not when estimating elevation.
 
     private bool wpCountdown = false; //used to determine if we're moving forward or backward through the waypoints.
@@ -123,6 +112,17 @@ public class TestBehaviors : MonoBehaviour
 
     private float lookRadius = 8f;
 
+    private bool canThrow = false;
+
+    private bool holdingBall = false;
+
+    private BallPosition ballScript;
+
+    private float playerDistance;
+
+
+
+
 
 
 
@@ -134,7 +134,8 @@ public class TestBehaviors : MonoBehaviour
 
     void Start()
     {
-        
+        playerDistance = Vector3.Distance(target.position, transform.position);
+
 
         StartCoroutine(Initialize()); //co-routine is used incase you need to interupt initiialization until something else is done.
 
@@ -144,13 +145,6 @@ public class TestBehaviors : MonoBehaviour
 
     IEnumerator Initialize()
     {
-
-        if ((estimateElevation) && (floatHeight > 0.0f))
-        {
-
-            estGravityTimer = Time.time;
-
-        }
 
         characterController = gameObject.GetComponent<CharacterController>();
 
@@ -171,6 +165,7 @@ public class TestBehaviors : MonoBehaviour
     void Update()
     {
 
+
         if (!on || !initialGo)
         {
 
@@ -179,13 +174,16 @@ public class TestBehaviors : MonoBehaviour
         }
         else
         {
-            float distance = Vector3.Distance(ballTransform.position, transform.position);
+
+            float distance = Vector3.Distance(ball.transform.position, ballPosition.transform.position);
 
             if (distance <= lookRadius)
             {
-                ballTransform.position = transform.position;
-                Debug.Log("AI picked up ball.");
+
+
+                StartCoroutine(PickUp());
             }
+
 
             AIFunctionality();
 
@@ -218,13 +216,6 @@ public class TestBehaviors : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
 
 
-
-        if (go)
-        {
-
-            MonitorGravity();
-
-        }
 
 
 
@@ -264,7 +255,7 @@ public class TestBehaviors : MonoBehaviour
                 WalkNewPath();
 
             }
-            else if ((runAway || runTo) && (distance > runDistance) && (!executeBufferState))
+            else if ((runAway || runTo)  && (!executeBufferState))
             {
 
                 //move in random directions.
@@ -290,7 +281,7 @@ public class TestBehaviors : MonoBehaviour
                 }
 
             }
-            else if ((runAway || runTo) && (distance < runDistance) && (!executeBufferState))
+            else if ((runAway || runTo) && (!executeBufferState))
             { //make sure they do not get too close to the target
 
                 //AHH! RUN AWAY!...  or possibly charge :D
@@ -320,7 +311,7 @@ public class TestBehaviors : MonoBehaviour
                 }
 
             }
-            else if (executeBufferState && ((runAway) && (distance < runBufferDistance)) || ((runTo) && (distance > runBufferDistance)))
+            else if (executeBufferState && ((runAway)  || ((runTo) )))
             {
 
                 //continue to run!
@@ -339,7 +330,7 @@ public class TestBehaviors : MonoBehaviour
                 }
 
             }
-            else if ((executeBufferState) && (((runAway) && (distance > runBufferDistance)) || ((runTo) && (distance < runBufferDistance))))
+            else if ((executeBufferState) && (((runAway)) || ((runTo) )))
             {
 
                 monitorRunTo = true; //make sure that when we have made it to our buffer distance (close to user) we stop the charge until far enough away.
@@ -351,7 +342,7 @@ public class TestBehaviors : MonoBehaviour
 
             //start attacking if close enough
 
-            if ((distance < attackRange) || ((!runAway && !runTo) && (distance < runDistance)))
+            if (playerDistance <= lookRadius)
             {
 
                 if (runAway)
@@ -361,10 +352,10 @@ public class TestBehaviors : MonoBehaviour
 
                 }
 
-                if (Time.time > lastShotFired + attackTime)
+                if (/*Time.time > lastShotFired + attackTime*/ holdingBall == true)
                 {
 
-                    StartCoroutine(Attack());
+                    StartCoroutine(Throw());
 
                 }
 
@@ -400,35 +391,49 @@ public class TestBehaviors : MonoBehaviour
 
     }
 
+    IEnumerator Throw()
+    {
+
+        canThrow = true;
+        lastShotFired = Time.time;
+
+
+
+
+
+        Debug.Log("Throw script activated.");
+
+
+
+
+        yield return new WaitForSeconds(attackTime);
+
+    }
+
+
 
 
     //attack stuff...
 
-    IEnumerator Attack()
+    IEnumerator PickUp()
     {
+        ballScript = new BallPosition();
 
-        enemyCanAttack = true;
+        holdingBall = true;
+
+        Debug.Log("AI picked up ball.");
 
 
-
-        if (!enemyIsAttacking)
+        if (holdingBall)
         {
-
-            enemyIsAttacking = true;
-
-            while (enemyCanAttack)
-            {
-
-                lastShotFired = Time.time;
-
-                //implement attack variables here
-
-                yield return new WaitForSeconds(attackTime);
-
-            }
+            ball.transform.position = ballPosition.transform.position;
 
         }
 
+
+        else { canThrow = false; holdingBall = false; }
+
+        yield return new WaitForSeconds(attackTime);
     }
 
 
@@ -576,7 +581,7 @@ public class TestBehaviors : MonoBehaviour
 
         MoveTowards(moveToward);
 
-        if (distance <= 1.5f + floatHeight)
+        if (distance <= 1.5f)
         {// || (distance < floatHeight+1.5f)) {
 
             if (pauseAtWaypoints)
@@ -774,253 +779,15 @@ public class TestBehaviors : MonoBehaviour
 
         direction = forward * speed * speedModifier;
 
-        if ((!canFly) && (floatHeight <= 0.0f))
-        {
-
+        
             direction.y -= gravity;
 
-        }
+        
 
         characterController.Move(direction * Time.deltaTime);
 
     }
 
-
-
-    //continuous gravity checks
-
-    void MonitorGravity()
-    {
-
-        Vector3 direction = new Vector3(0, 0, 0);
-
-
-
-        if ((!canFly) && (floatHeight > 0.0f))
-        {
-
-            //we need to make sure our enemy is floating.. using evil raycasts! bwahahahah!
-
-            if ((estimateElevation) && (estRayTimer > 0.0f))
-            {
-
-                if (Time.time > estGravityTimer)
-                {
-
-                    RaycastHit floatCheck;
-
-                    if (Physics.Raycast(transform.position, -Vector3.up, out floatCheck))
-                    {
-
-                        if (floatCheck.distance < floatHeight - 0.5f)
-                        {
-
-                            estCheckDirection = 1;
-
-                            estHeight = floatHeight - floatCheck.distance;
-
-                        }
-                        else if (floatCheck.distance > floatHeight + 0.5f)
-                        {
-
-                            estCheckDirection = 2;
-
-                            estHeight = floatCheck.distance - floatHeight;
-
-                        }
-                        else
-                        {
-
-                            estCheckDirection = 3;
-
-                        }
-
-                    }
-                    else
-                    {
-
-                        estCheckDirection = 2;
-
-                        estHeight = floatHeight * 2;
-
-                    }
-
-                    estGravityTimer = Time.time + estRayTimer;
-
-                }
-
-
-
-                switch (estCheckDirection)
-                {
-
-                    case 1:
-
-                        direction.y += antigravity;
-
-                        estHeight -= direction.y * Time.deltaTime;
-
-                        break;
-
-                    case 2:
-
-                        direction.y -= gravity;
-
-                        estHeight -= direction.y * Time.deltaTime;
-
-                        break;
-
-                    default:
-
-                        //do nothing
-
-                        break;
-
-                }
-
-
-
-            }
-            else
-            {
-
-                RaycastHit floatCheck;
-
-                if (Physics.Raycast(transform.position, -Vector3.up, out floatCheck, floatHeight + 1.0f))
-                {
-
-                    if (floatCheck.distance < floatHeight)
-                    {
-
-                        direction.y += antigravity;
-
-                    }
-
-                }
-                else
-                {
-
-                    direction.y -= gravity;
-
-                }
-
-            }
-
-        }
-        else
-        {
-
-            //bird like creature! Again with the evil raycasts! :p
-
-            if ((estimateElevation) && (estRayTimer > 0.0f))
-            {
-
-                if (Time.time > estGravityTimer)
-                {
-
-                    RaycastHit floatCheck;
-
-                    if (Physics.Raycast(transform.position, -Vector3.up, out floatCheck))
-                    {
-
-                        if (floatCheck.distance < floatHeight - 0.5f)
-                        {
-
-                            estCheckDirection = 1;
-
-                            estHeight = floatHeight - floatCheck.distance;
-
-                        }
-                        else if (floatCheck.distance > floatHeight + 0.5f)
-                        {
-
-                            estCheckDirection = 2;
-
-                            estHeight = floatCheck.distance - floatHeight;
-
-                        }
-                        else
-                        {
-
-                            estCheckDirection = 3;
-
-                        }
-
-                    }
-
-                    estGravityTimer = Time.time + estRayTimer;
-
-                }
-
-
-
-                switch (estCheckDirection)
-                {
-
-                    case 1:
-
-                        direction.y += antigravity;
-
-                        estHeight -= direction.y * Time.deltaTime;
-
-                        break;
-
-                    case 2:
-
-                        direction.y -= antigravity;
-
-                        estHeight -= direction.y * Time.deltaTime;
-
-                        break;
-
-                    default:
-
-                        //do nothing
-
-                        break;
-
-                }
-
-
-
-            }
-            else
-            {
-
-                RaycastHit floatCheck;
-
-                if (Physics.Raycast(transform.position, -Vector3.up, out floatCheck))
-                {
-
-                    if (floatCheck.distance < floatHeight - 0.5f)
-                    {
-
-                        direction.y += antigravity;
-
-                    }
-                    else if (floatCheck.distance > floatHeight + 0.5f)
-                    {
-
-                        direction.y -= antigravity;
-
-                    }
-
-                }
-
-            }
-
-        }
-
-
-
-        if ((!estimateElevation) || ((estimateElevation) && (estHeight >= 0.0f)))
-        {
-
-            characterController.Move(direction * Time.deltaTime);
-
-        }
-
-    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
@@ -1029,5 +796,10 @@ public class TestBehaviors : MonoBehaviour
 
 
 }
+
+
+
+
+
 
 
