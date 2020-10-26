@@ -14,11 +14,6 @@ public class BallPosition : MonoBehaviour
     // a return point to a dodge ball. It seems like the easiest way to do so.
     /// </summary>
 
-    [SerializeField] private GameObject outOfBoundsColliderBlue;
-    [SerializeField] private GameObject outOfBoundsColliderRed;
-
-    [SerializeField] private GameObject blueSpawn;
-    [SerializeField] private GameObject redSpawn;
 
     private Rigidbody ball_RigidBody;
 
@@ -29,7 +24,12 @@ public class BallPosition : MonoBehaviour
     public GameObject item;
     public GameObject tempParent;
     public bool isHolding = false;
-    
+
+    [SerializeField] private GameObject outOfBoundsColliderBlue;
+    [SerializeField] private GameObject outOfBoundsColliderRed;
+
+    [SerializeField] private GameObject blueSpawn;
+    [SerializeField] private GameObject redSpawn;
 
     public Text holdText;
 
@@ -104,7 +104,7 @@ public class BallPosition : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision)
-    {
+    {  
         if (collision.collider.tag == "BlueReturn")
         {
             Debug.Log("Blue return hit");

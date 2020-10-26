@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - AITest
   - Ball
+  - Waypoint
+  - Hand
   layers:
   - Default
   - TransparentFX

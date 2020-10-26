@@ -7,8 +7,15 @@ public class AICamera : MonoBehaviour
     public Transform player;
     public float maxAngle;
     public float maxRadius;
+    public GameObject ball;
+
 
     private bool isInFOV = false;
+
+    public void Start()
+    {
+        
+    }
 
     private void OnDrawGizmos()
     {
@@ -25,13 +32,16 @@ public class AICamera : MonoBehaviour
         Gizmos.DrawRay(transform.position, fovLine02);
 
         if (!isInFOV)
-        { 
-        Debug.ClearDeveloperConsole();
-        Gizmos.color = Color.red;
+        {
+
+            Gizmos.color = Color.red;
         }
         else
+        { 
             Debug.Log("I See You.");
             Gizmos.color = Color.green;
+        }
+        
 
         Gizmos.DrawRay(transform.position, (player.position - transform.position).normalized * maxRadius);
 
