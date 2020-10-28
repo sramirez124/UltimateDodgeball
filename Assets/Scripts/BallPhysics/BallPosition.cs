@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BallPosition : MonoBehaviour
 {
-    [SerializeField] public float throwforce = 600; //showing in inspector for testing purposes
+    [SerializeField] private float throwforce = 600; //showing in inspector for testing purposes
     Vector3 objectPos;
     float distance;
 
@@ -14,22 +14,22 @@ public class BallPosition : MonoBehaviour
     // a return point to a dodge ball. It seems like the easiest way to do so.
     /// </summary>
 
+    //[SerializeField] private GameObject outOfBoundsColliderBlue;
+    //[SerializeField] private GameObject outOfBoundsColliderRed;
+
+    [SerializeField] private GameObject blueSpawn;
+    [SerializeField] private GameObject redSpawn;
 
     private Rigidbody ball_RigidBody;
 
     //gravity force when thrown
-    public float downScale = 50f;
+    float downScale = 50f;
 
     public bool canHold = true;
     public GameObject item;
     public GameObject tempParent;
     public bool isHolding = false;
-
-    [SerializeField] private GameObject outOfBoundsColliderBlue;
-    [SerializeField] private GameObject outOfBoundsColliderRed;
-
-    [SerializeField] private GameObject blueSpawn;
-    [SerializeField] private GameObject redSpawn;
+    
 
     public Text holdText;
 
@@ -104,7 +104,7 @@ public class BallPosition : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision)
-    {  
+    {
         if (collision.collider.tag == "BlueReturn")
         {
             Debug.Log("Blue return hit");
