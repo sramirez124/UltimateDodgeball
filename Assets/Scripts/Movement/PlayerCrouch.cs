@@ -21,6 +21,7 @@ public class PlayerCrouch : MonoBehaviour
             cCollider.height = 2.5f;
            
 
+
         }
        
         else

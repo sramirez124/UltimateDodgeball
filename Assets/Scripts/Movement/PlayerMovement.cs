@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public CharacterController controller;
+    Animator anim;
 
     public float speed = 10f;
     public float gravity = -9.81f;
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") /*&& isGrounded*/ )
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-
+            anim.SetBool("jump", true);
         }
 
         float x = Input.GetAxis("Horizontal");
