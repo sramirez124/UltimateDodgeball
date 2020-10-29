@@ -13,7 +13,7 @@ public class TestBehaviors : MonoBehaviour
 
     public bool on = true; //Is the AI active? this can be used to place pre-set enemies in you scene.
 
-
+    Animator anim;
     public bool runAway = false; //Is it the goal of this AI to keep it's distance? If so, it needs to have runaway active.
 
     public bool runTo = false; //Opposite to runaway, within a certain distance, the enemy will run toward the target.
@@ -57,6 +57,11 @@ public class TestBehaviors : MonoBehaviour
     public GameObject ballPosition;
 
     public GameObject[] enemies;
+
+    public GameObject hand;
+
+
+    public float throwForce = 500f;
 
 
 
@@ -120,6 +125,17 @@ public class TestBehaviors : MonoBehaviour
 
     private float playerDistance;
 
+    private Vector3 throwDirection;
+
+    private Rigidbody rbBall;
+
+    private float downScale = 50f;
+
+    Vector3 objPosition;
+
+    string ballTagSwitch;
+
+
 
 
 
@@ -135,6 +151,12 @@ public class TestBehaviors : MonoBehaviour
     void Start()
     {
         playerDistance = Vector3.Distance(target.position, transform.position);
+
+        throwDirection = target.transform.position;
+        rbBall = ball.GetComponent<Rigidbody>();
+        anim = gameObject.GetComponent<Animator>();
+
+        ballTagSwitch = ball.tag;
 
 
         StartCoroutine(Initialize()); //co-routine is used incase you need to interupt initiialization until something else is done.
@@ -180,12 +202,31 @@ public class TestBehaviors : MonoBehaviour
             if (distance <= lookRadius)
             {
 
-
+                holdingBall = true;
                 StartCoroutine(PickUp());
+
+
+            }
+            if (holdingBall == true)
+            {
+                StartCoroutine(Throw());
+
+            }
+            /*
+            if(holdingBall == false && canThrow == false)
+            {
+
+                StartCoroutine(Dodge());
+            }
+            */
+            else
+            {
+
+                AIFunctionality();
             }
 
 
-            AIFunctionality();
+
 
         }
 
@@ -255,7 +296,7 @@ public class TestBehaviors : MonoBehaviour
                 WalkNewPath();
 
             }
-            else if ((runAway || runTo)  && (!executeBufferState))
+            else if ((runAway || runTo) && (!executeBufferState))
             {
 
                 //move in random directions.
@@ -311,7 +352,7 @@ public class TestBehaviors : MonoBehaviour
                 }
 
             }
-            else if (executeBufferState && ((runAway)  || ((runTo) )))
+            else if (executeBufferState && ((runAway) || ((runTo))))
             {
 
                 //continue to run!
@@ -330,7 +371,7 @@ public class TestBehaviors : MonoBehaviour
                 }
 
             }
-            else if ((executeBufferState) && (((runAway)) || ((runTo) )))
+            else if ((executeBufferState) && (((runAway)) || ((runTo))))
             {
 
                 monitorRunTo = true; //make sure that when we have made it to our buffer distance (close to user) we stop the charge until far enough away.
@@ -394,19 +435,58 @@ public class TestBehaviors : MonoBehaviour
     IEnumerator Throw()
     {
 
+        pauseWpControl = true;
+        anim.SetBool("run", false);
         canThrow = true;
         lastShotFired = Time.time;
 
 
 
+        if (canThrow)
+        {
+            transform.LookAt(target);
+
+            yield return new WaitForSeconds(3f);
+
+            ball.GetComponent<Rigidbody>().useGravity = true;
+
+            ball.GetComponent<Rigidbody>().AddForce(hand.transform.forward * throwForce);
+
+            ball.GetComponent<Rigidbody>().AddForce(Vector3.down * downScale);
+
+            Debug.Log("Throw script activated.");
+
+        }
+        else
+        {
 
 
-        Debug.Log("Throw script activated.");
+            canThrow = false;
+
+
+            objPosition = ball.transform.position;
+            ball.transform.SetParent(null);
+            ball.GetComponent<Rigidbody>().useGravity = true;
+            ball.transform.position = objPosition;
 
 
 
 
-        yield return new WaitForSeconds(attackTime);
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        yield return new WaitForSeconds(1f);
 
     }
 
@@ -417,23 +497,53 @@ public class TestBehaviors : MonoBehaviour
 
     IEnumerator PickUp()
     {
-        ballScript = new BallPosition();
+
+
 
         holdingBall = true;
+
+
 
         Debug.Log("AI picked up ball.");
 
 
-        if (holdingBall)
+        if (holdingBall == true)
         {
-            ball.transform.position = ballPosition.transform.position;
+            ballTagSwitch = "AIBall";
+
+
+            ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            ball.GetComponent<Rigidbody>().useGravity = false;
+            ball.transform.SetParent(hand.transform);
+
+            anim.SetBool("isHolding", true);
 
         }
 
 
         else { canThrow = false; holdingBall = false; }
 
-        yield return new WaitForSeconds(attackTime);
+        yield return new WaitForSeconds(1.5f);
+    }
+
+    IEnumerator Dodge()
+    {
+        holdingBall = false;
+        canThrow = false;
+        if (holdingBall == false && canThrow == false)
+        {
+
+            characterController.height = 2.5f;
+
+        }
+        else { characterController.height = 3.8f; }
+
+
+
+
+        yield return new WaitForSeconds(1.5f);
+
     }
 
 
@@ -565,6 +675,7 @@ public class TestBehaviors : MonoBehaviour
 
     void Patrol()
     {
+        anim.SetBool("run", true);
 
         if (pauseWpControl)
         {
@@ -586,6 +697,7 @@ public class TestBehaviors : MonoBehaviour
 
             if (pauseAtWaypoints)
             {
+                anim.SetBool("run", false);
 
                 if (!pauseWpControl)
                 {
@@ -612,6 +724,7 @@ public class TestBehaviors : MonoBehaviour
 
     IEnumerator WaypointPause()
     {
+        anim.SetBool("idle", true);
 
         yield return new WaitForSeconds(Random.Range(pauseMin, pauseMax));
 
@@ -779,10 +892,10 @@ public class TestBehaviors : MonoBehaviour
 
         direction = forward * speed * speedModifier;
 
-        
-            direction.y -= gravity;
 
-        
+        direction.y -= gravity;
+
+
 
         characterController.Move(direction * Time.deltaTime);
 
