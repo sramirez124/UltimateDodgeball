@@ -115,7 +115,7 @@ public class TestBehaviors : MonoBehaviour
 
     private bool smoothAttackRangeBuffer = false; //for runAway AI to not be so messed up by their visual radius and attack range.
 
-    private float lookRadius = 8f;
+    private float lookRadius = 10f;
 
     private bool canThrow = false;
 
@@ -205,6 +205,7 @@ public class TestBehaviors : MonoBehaviour
                 holdingBall = true;
                 StartCoroutine(PickUp());
 
+                
 
             }
             if (holdingBall == true)
@@ -212,13 +213,13 @@ public class TestBehaviors : MonoBehaviour
                 StartCoroutine(Throw());
 
             }
-            /*
-            if(holdingBall == false && canThrow == false)
-            {
+            
+          //  if(holdingBall == false && canThrow == false)
+            //{
 
-                StartCoroutine(Dodge());
-            }
-            */
+            //    StartCoroutine(Dodge());
+            //}
+            
             else
             {
 
@@ -396,7 +397,7 @@ public class TestBehaviors : MonoBehaviour
                 if (/*Time.time > lastShotFired + attackTime*/ holdingBall == true)
                 {
 
-                    StartCoroutine(Throw());
+                    //StartCoroutine(Throw());
 
                 }
 
@@ -437,7 +438,7 @@ public class TestBehaviors : MonoBehaviour
 
         pauseWpControl = true;
         anim.SetBool("run", false);
-        canThrow = true;
+        
         lastShotFired = Time.time;
 
 
@@ -465,8 +466,9 @@ public class TestBehaviors : MonoBehaviour
 
 
             objPosition = ball.transform.position;
+            ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
             ball.transform.SetParent(null);
-            ball.GetComponent<Rigidbody>().useGravity = true;
+           
             ball.transform.position = objPosition;
 
 
@@ -486,7 +488,7 @@ public class TestBehaviors : MonoBehaviour
 
 
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
     }
 
@@ -509,7 +511,8 @@ public class TestBehaviors : MonoBehaviour
 
         if (holdingBall == true)
         {
-            ballTagSwitch = "AIBall";
+            canThrow = true;
+           // ballTagSwitch = "AIBall";
 
 
             ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
