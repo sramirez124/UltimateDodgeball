@@ -111,6 +111,7 @@ public class BallPosition : MonoBehaviour
             this.transform.position = new Vector3(blueSpawn.transform.position.x, blueSpawn.transform.position.y, blueSpawn.transform.position.z);
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            
         }
 
         if (collision.collider.tag == "RedReturn")
