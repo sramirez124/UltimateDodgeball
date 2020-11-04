@@ -60,6 +60,8 @@ public class TestBehaviors : MonoBehaviour
 
     public GameObject hand;
 
+    public float lookRadius = 10f;
+
 
     public float throwForce = 500f;
 
@@ -114,8 +116,6 @@ public class TestBehaviors : MonoBehaviour
     private bool pauseWpControl; //makes sure unit pauses appropriately.
 
     private bool smoothAttackRangeBuffer = false; //for runAway AI to not be so messed up by their visual radius and attack range.
-
-    private float lookRadius = 10f;
 
     private bool canThrow = false;
 
@@ -443,11 +443,11 @@ public class TestBehaviors : MonoBehaviour
 
 
 
-        if (canThrow)
+        if (canThrow == true)
         {
             transform.LookAt(target);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1.5f);
 
             ball.GetComponent<Rigidbody>().useGravity = true;
 
@@ -456,6 +456,8 @@ public class TestBehaviors : MonoBehaviour
             ball.GetComponent<Rigidbody>().AddForce(Vector3.down * downScale);
 
             Debug.Log("Throw script activated.");
+
+            canThrow = false;
 
         }
         else
@@ -467,19 +469,20 @@ public class TestBehaviors : MonoBehaviour
 
             objPosition = ball.transform.position;
             ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            ball.GetComponent<Rigidbody>().useGravity = false ;
             ball.transform.SetParent(null);
-           
+            AIFunctionality();
             ball.transform.position = objPosition;
 
 
-
-
+            
+            pauseWpControl = true;
 
 
 
 
         }
-
+        
 
 
 
@@ -561,21 +564,9 @@ public class TestBehaviors : MonoBehaviour
 
     bool TargetIsInSight()
     {
-
         //determine if the enemy should be doing anything other than standing still
 
-        if ((moveableRadius > 0) && (Vector3.Distance(transform.position, target.position) > moveableRadius))
-        {
-
-            go = false;
-
-        }
-        else
-        {
-
-            go = true;
-
-        }
+        NewMethod();
 
 
 
@@ -616,6 +607,22 @@ public class TestBehaviors : MonoBehaviour
 
         }
 
+    }
+
+    private void NewMethod()
+    {
+        if ((moveableRadius > 0) && (Vector3.Distance(transform.position, target.position) > moveableRadius))
+        {
+
+            go = false;
+
+        }
+        else
+        {
+
+            go = true;
+
+        }
     }
 
 

@@ -23,6 +23,7 @@ public class BallPosition : MonoBehaviour
     public bool canHold = true;
     public GameObject item;
     public GameObject tempParent;
+    public GameObject tempAI;
     public bool isHolding = false;
 
     [SerializeField] private GameObject outOfBoundsColliderBlue;
@@ -39,6 +40,7 @@ public class BallPosition : MonoBehaviour
         
 
         distance = Vector3.Distance(item.transform.position, tempParent.transform.position);
+
 
         if (distance >= 10f)
         {

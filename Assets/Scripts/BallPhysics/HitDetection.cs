@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HitDetection : MonoBehaviour
 {
-    public GameObject testDummy;
-    public GameObject player;
+    private GameObject testDummy;
+    private GameObject player;
     public Transform PlayerSpawn;
     public Transform aiSpawn;
     public Text scoreText;
@@ -18,7 +19,9 @@ public class HitDetection : MonoBehaviour
    public void Start()
     {
 
-        
+        testDummy = GameObject.FindGameObjectWithTag("AITest");
+        player = GameObject.FindGameObjectWithTag("Player");
+
 
     }
 
@@ -29,9 +32,14 @@ public class HitDetection : MonoBehaviour
         if(hit.collider.tag == "Player")
         {
             //scoreText.text = (hitPlayer + 1).ToString();
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
+            Destroy(testDummy);
             StartCoroutine(Wait());
+
             Instantiate(player, PlayerSpawn);
+
+            
+
+            SceneManager.LoadScene(1);
 
 
         }
@@ -43,6 +51,10 @@ public class HitDetection : MonoBehaviour
             StartCoroutine(Wait());
 
             Instantiate(testDummy, aiSpawn);
+
+            StartCoroutine(Wait());
+
+            SceneManager.LoadScene(1);
 
         }
 
