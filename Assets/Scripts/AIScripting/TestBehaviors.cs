@@ -1,4 +1,5 @@
 ﻿
+
 using UnityEngine;
 
 using System.Collections;
@@ -121,8 +122,6 @@ public class TestBehaviors : MonoBehaviour
 
     private bool holdingBall = false;
 
-    private BallPosition ballScript;
-
     private float playerDistance;
 
     private Vector3 throwDirection;
@@ -131,7 +130,7 @@ public class TestBehaviors : MonoBehaviour
 
     private float downScale = 50f;
 
-    Vector3 objPosition;
+    private Vector3 objPosition;
 
     string ballTagSwitch;
 
@@ -205,7 +204,7 @@ public class TestBehaviors : MonoBehaviour
                 holdingBall = true;
                 StartCoroutine(PickUp());
 
-                
+
 
             }
             if (holdingBall == true)
@@ -213,13 +212,13 @@ public class TestBehaviors : MonoBehaviour
                 StartCoroutine(Throw());
 
             }
-            
-          //  if(holdingBall == false && canThrow == false)
+
+            //  if(holdingBall == false && canThrow == false)
             //{
 
             //    StartCoroutine(Dodge());
             //}
-            
+
             else
             {
 
@@ -435,54 +434,28 @@ public class TestBehaviors : MonoBehaviour
 
     IEnumerator Throw()
     {
+        transform.LookAt(target);
 
-        pauseWpControl = true;
+
+
         anim.SetBool("run", false);
-        
-        lastShotFired = Time.time;
 
+        ball.transform.position = hand.transform.position;
 
+        yield return new WaitForSeconds(2f);
 
-        if (canThrow == true)
-        {
-            transform.LookAt(target);
-
-            yield return new WaitForSeconds(1.5f);
-
-            ball.GetComponent<Rigidbody>().useGravity = true;
-
-            ball.GetComponent<Rigidbody>().AddForce(hand.transform.forward * throwForce);
-
-            ball.GetComponent<Rigidbody>().AddForce(Vector3.down * downScale);
-
-            Debug.Log("Throw script activated.");
-
-            canThrow = false;
-
-        }
-        else
+        Transform t = ball.GetComponent<Transform>();
+        Vector3 originalPosition = t.position;
+        float counter = 0f;
+        anim.Play("ThrowBall");
+        while (counter < 1f)
         {
 
+            t.position = Vector3.Lerp(t.position, target.transform.position, counter);
+            counter += Time.deltaTime;
 
-            canThrow = false;
-
-
-            objPosition = ball.transform.position;
-            ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            ball.GetComponent<Rigidbody>().useGravity = false ;
-            ball.transform.SetParent(null);
-            AIFunctionality();
-            ball.transform.position = objPosition;
-
-
-            
-            pauseWpControl = true;
-
-
-
-
+            yield return 0;
         }
-        
 
 
 
@@ -491,7 +464,14 @@ public class TestBehaviors : MonoBehaviour
 
 
 
-        yield return new WaitForSeconds(3f);
+
+
+
+
+
+
+
+
 
     }
 
@@ -515,7 +495,7 @@ public class TestBehaviors : MonoBehaviour
         if (holdingBall == true)
         {
             canThrow = true;
-           // ballTagSwitch = "AIBall";
+            // ballTagSwitch = "AIBall";
 
 
             ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -919,6 +899,13 @@ public class TestBehaviors : MonoBehaviour
 
 
 }
+
+
+
+
+
+
+
 
 
 

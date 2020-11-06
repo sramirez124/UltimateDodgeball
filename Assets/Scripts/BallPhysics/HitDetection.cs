@@ -28,36 +28,38 @@ public class HitDetection : MonoBehaviour
 
     private void OnCollisionEnter(Collision hit)
     {
-
-        if(hit.collider.tag == "Player")
+        if (hit.collider.tag == "Player")
         {
             //scoreText.text = (hitPlayer + 1).ToString();
-            Destroy(testDummy);
+            player.transform.position = PlayerSpawn.position;
+            Destroy(this.gameObject);
             StartCoroutine(Wait());
 
-            Instantiate(player, PlayerSpawn);
+
+
+
+
+            SceneManager.LoadScene(2);
+
+        }
+
+        if (hit.collider.tag == "AITest")
+        {
+            /*scoreText.text = (hitPlayer + 1).ToString();
+            Destroy(testDummy);
+
+            StartCoroutine(Wait());
 
             
 
-            SceneManager.LoadScene(1);
+            StartCoroutine(Wait());
+
+            //SceneManager.LoadScene(1);
+            */
+
 
 
         }
-        if (hit.collider.tag == "AITest")
-        {
-            //scoreText.text = (hitPlayer + 1).ToString();
-            Destroy(GameObject.FindGameObjectWithTag("AITest"));
-
-            StartCoroutine(Wait());
-
-            Instantiate(testDummy, aiSpawn);
-
-            StartCoroutine(Wait());
-
-            SceneManager.LoadScene(1);
-
-        }
-
        
 
     }
