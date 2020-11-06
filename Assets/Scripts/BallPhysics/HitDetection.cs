@@ -10,6 +10,7 @@ public class HitDetection : MonoBehaviour
     private GameObject player;
     public Transform PlayerSpawn;
     public Transform aiSpawn;
+    public Transform aiNextMove;
     public Text scoreText;
     public int hitPlayer = 0;
 
@@ -32,30 +33,36 @@ public class HitDetection : MonoBehaviour
         {
             //scoreText.text = (hitPlayer + 1).ToString();
             player.transform.position = PlayerSpawn.position;
-            Destroy(this.gameObject);
+            Destroy(GetComponent<GameObject>());
             StartCoroutine(Wait());
 
 
 
 
 
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
 
         }
 
         if (hit.collider.tag == "AITest")
         {
-            /*scoreText.text = (hitPlayer + 1).ToString();
-            Destroy(testDummy);
+            //scoreText.text = (hitPlayer + 1).ToString();
+            testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiSpawn.position,Time.deltaTime);
+
 
             StartCoroutine(Wait());
+
+            if(testDummy.transform.position == aiSpawn.position)
+            {
+                testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiNextMove.position,Time.deltaTime);
+
+            }
 
             
-
-            StartCoroutine(Wait());
+;
 
             //SceneManager.LoadScene(1);
-            */
+            
 
 
 

@@ -442,13 +442,13 @@ public class TestBehaviors : MonoBehaviour
 
         ball.transform.position = hand.transform.position;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
 
         Transform t = ball.GetComponent<Transform>();
         Vector3 originalPosition = t.position;
         float counter = 0f;
         anim.Play("ThrowBall");
-        while (counter < 1f)
+        while (counter < 10f)
         {
 
             t.position = Vector3.Lerp(t.position, target.transform.position, counter);
@@ -487,7 +487,7 @@ public class TestBehaviors : MonoBehaviour
 
         holdingBall = true;
 
-
+        
 
         Debug.Log("AI picked up ball.");
 
