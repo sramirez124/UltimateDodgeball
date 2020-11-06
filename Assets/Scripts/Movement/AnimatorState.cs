@@ -24,10 +24,10 @@ public class AnimatorState : MonoBehaviour
             animator.SetBool("run", false);
         }
 
-        //if (Input.GetKey("space"))
-        //{
-        //    animator.SetBool("jump", true);
-        //}
+        if (Input.GetKey("space"))
+        {
+            animator.SetBool("jump", true);
+        }
 
         if (!Input.GetKey("space"))
         {

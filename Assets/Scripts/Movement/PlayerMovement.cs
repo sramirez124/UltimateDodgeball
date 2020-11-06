@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") /*&& isGrounded*/ )
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            anim.SetBool("jump", true);
         }
 
         float x = Input.GetAxis("Horizontal");
