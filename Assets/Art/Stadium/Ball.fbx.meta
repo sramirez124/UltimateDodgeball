@@ -3,7 +3,12 @@ guid: 769fb2c729b4be24ca4cc300725fb612
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dodgeball
+    second: {fileID: 2100000, guid: 15d6b00084cfd2a45867678a694d4d2f, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

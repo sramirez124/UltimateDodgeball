@@ -18,22 +18,22 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bench_low_aiStandardSurface1SG_BaseColor
-    second: {fileID: 2800000, guid: 72d7b4c2da66b864eb0a65e235ab76ff, type: 3}
+    second: {fileID: 2800000, guid: 171d1f1796db5524ebc7adcae1857a3e, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bench_low_aiStandardSurface1SG_Metallic
-    second: {fileID: 2800000, guid: 47b0a332ab2dc0d4c8efbb34b2280b2b, type: 3}
+    second: {fileID: 2800000, guid: bd375373c366319468077eabb05a352b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bench_low_aiStandardSurface1SG_Normal
-    second: {fileID: 2800000, guid: 23e4feee4f64c8e4ea9d7cbb216fc6ac, type: 3}
+    second: {fileID: 2800000, guid: 6317be462813b28469faf02942a2d8b1, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Bench_low_aiStandardSurface1SG_Roughness
-    second: {fileID: 2800000, guid: 2701d0016bd5c0346a8f792002e4a8d7, type: 3}
+    second: {fileID: 2800000, guid: f18d489aa272e404785063d9653d2068, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
