@@ -63,7 +63,7 @@ public class TestBehaviors : MonoBehaviour
 
     public float lookRadius = 10f;
 
-
+    public Transform[] ballEndPosition = new Transform[10];
     public float throwForce = 500f;
 
 
@@ -436,6 +436,9 @@ public class TestBehaviors : MonoBehaviour
     {
         transform.LookAt(target);
 
+         
+
+        int random = Random.Range(0,ballEndPosition.Length);
 
 
         anim.SetBool("run", false);
@@ -451,11 +454,12 @@ public class TestBehaviors : MonoBehaviour
         while (counter < 10f)
         {
 
-            t.position = Vector3.Lerp(t.position, target.transform.position, counter);
+            t.position = Vector3.Lerp(t.position, ballEndPosition[random].position, counter);
             counter += Time.deltaTime;
 
             yield return 0;
         }
+        anim.SetBool("idle", true);
 
 
 

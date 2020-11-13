@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class HitDetection : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class HitDetection : MonoBehaviour
     public Transform PlayerSpawn;
     public Transform aiSpawn;
     public Transform aiNextMove;
-    public Text scoreText;
+    public TMP_Text scoreText;
     public int hitPlayer = 0;
 
     public Random rnd;
@@ -32,6 +33,7 @@ public class HitDetection : MonoBehaviour
         if (hit.collider.tag == "Player")
         {
             //scoreText.text = (hitPlayer + 1).ToString();
+            
             player.transform.position = PlayerSpawn.position;
             Destroy(GetComponent<GameObject>());
             StartCoroutine(Wait());
@@ -40,13 +42,13 @@ public class HitDetection : MonoBehaviour
 
 
 
-            SceneManager.LoadScene(1);
+            //SceneManager.LoadScene(1);
 
         }
 
         if (hit.collider.tag == "AITest")
         {
-            //scoreText.text = (hitPlayer + 1).ToString();
+            scoreText.text = (hitPlayer + 1).ToString();
             testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiSpawn.position,Time.deltaTime);
 
 
@@ -75,7 +77,7 @@ public class HitDetection : MonoBehaviour
     {
         Debug.Log("Respawning...");
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
     }
 
 
