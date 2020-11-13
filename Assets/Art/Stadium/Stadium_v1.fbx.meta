@@ -3,7 +3,57 @@ guid: 59c6317c7245f9e4b99bf397a540e209
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlackWall
+    second: {fileID: 2100000, guid: 7c50e19a0cc4cae40913040fec389d74, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PillarTexture
+    second: {fileID: 2100000, guid: 7bd2ec51302610144a986ce8c5e8c4d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WhiteWall
+    second: {fileID: 2100000, guid: b6aedc92e15a89741bc96fb7ee40ab67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiStandardSurface16
+    second: {fileID: 2100000, guid: 2f86411644bf68547bef54f57535bb3f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar_low_aiStandardSurface18SG_BaseColor
+    second: {fileID: 2800000, guid: 7c3c5ae02a569204ba66f4696c9de491, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar_low_aiStandardSurface18SG_Metallic
+    second: {fileID: 2800000, guid: e80b45fdd29ad01448d52c166d538ec9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Pillar_low_aiStandardSurface18SG_Normal
+    second: {fileID: 2800000, guid: e98bb079a5ff7a74993ccfcdf1e55513, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Plaster_lightgray_large
+    second: {fileID: 2800000, guid: a2e542b7906146e44af12b8bfba25005, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Plaster_offblack
+    second: {fileID: 2800000, guid: 57b8d3e6a07ae564f80de29406e1c16a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Plaster_white_large
+    second: {fileID: 2800000, guid: ce69964673306344990c2542c5b28ad4, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

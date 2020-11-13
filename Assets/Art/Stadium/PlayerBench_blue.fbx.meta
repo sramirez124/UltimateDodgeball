@@ -3,7 +3,37 @@ guid: da2b446fd8f10484dbe0f6293a93e3ee
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BenchTextureBlue
+    second: {fileID: 2100000, guid: fd05f13b45723dc48b5f7ef4a2b75c88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BenchTextureRed
+    second: {fileID: 2100000, guid: 54b849024927cea479aa51186ba4ca40, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bench_low_aiStandardSurface1SG_BaseColor
+    second: {fileID: 2800000, guid: 72d7b4c2da66b864eb0a65e235ab76ff, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bench_low_aiStandardSurface1SG_Metallic
+    second: {fileID: 2800000, guid: 47b0a332ab2dc0d4c8efbb34b2280b2b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bench_low_aiStandardSurface1SG_Normal
+    second: {fileID: 2800000, guid: 23e4feee4f64c8e4ea9d7cbb216fc6ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bench_low_aiStandardSurface1SG_Roughness
+    second: {fileID: 2800000, guid: 2701d0016bd5c0346a8f792002e4a8d7, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

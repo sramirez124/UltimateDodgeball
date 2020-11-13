@@ -3,7 +3,32 @@ guid: 9292813ca8cf0a44f83aca000fa38c15
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BleacherLongRed
+    second: {fileID: 2100000, guid: fcd594fe8173e74458dbeea686dc5e0d, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BleacherLong_low_aiStandardSurface5SG_BaseColor
+    second: {fileID: 2800000, guid: 0ae274a8117803d419563caf45fb40ed, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BleacherLong_low_aiStandardSurface5SG_Metallic
+    second: {fileID: 2800000, guid: f61d2090cf3e24a4992030a8f75c605d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BleacherLong_low_aiStandardSurface5SG_Normal
+    second: {fileID: 2800000, guid: 7cc2192589851a04c9be83e0c2c4b905, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: BleacherLong_low_aiStandardSurface5SG_Roughness
+    second: {fileID: 2800000, guid: d977d1b16a8e50942978a5dac18a5dda, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

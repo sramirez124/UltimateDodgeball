@@ -3,7 +3,32 @@ guid: f666efd2f3855d24884ffa124b3281c1
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CoolerTextureRed
+    second: {fileID: 2100000, guid: 54c694f94acfb8044a2a2560dee8d872, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cooler_low_aiStandardSurface2SG_BaseColor
+    second: {fileID: 2800000, guid: f2eb035509008b94db9dd040d39161ad, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cooler_low_aiStandardSurface2SG_Metallic
+    second: {fileID: 2800000, guid: 215639f44cabd1d4f8babb373318abb0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cooler_low_aiStandardSurface2SG_Normal
+    second: {fileID: 2800000, guid: d79ee45ca20c95c4190851fab23e993b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cooler_low_aiStandardSurface2SG_Roughness
+    second: {fileID: 2800000, guid: 25e7dde5306f9e644ad9cb7451bab883, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

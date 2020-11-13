@@ -3,7 +3,32 @@ guid: 939c6f7ff3ace09419c3160f06571c32
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CartTexture
+    second: {fileID: 2100000, guid: ceeda1dc870b0f546a19d20a6186c338, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_low_aiStandardSurface3SG_BaseColor
+    second: {fileID: 2800000, guid: 05da2bac05d627a4bbcbd8a925014194, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_low_aiStandardSurface3SG_Metallic
+    second: {fileID: 2800000, guid: 198baa09b7af8204bae18cd9de1aab74, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_low_aiStandardSurface3SG_Normal
+    second: {fileID: 2800000, guid: c0c665de0ce964944a087bc8215046fb, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cart_low_aiStandardSurface3SG_Roughness
+    second: {fileID: 2800000, guid: ecb0fa24d8a5a4b42bc7e09bc8b581ac, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

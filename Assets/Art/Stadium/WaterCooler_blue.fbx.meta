@@ -3,7 +3,17 @@ guid: 7428a8b3326078f4f89930c808d69fff
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CoolerTextureBlue
+    second: {fileID: 2100000, guid: 8121a6f6a17e61644815e53c0a0bd12f, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cooler_low_aiStandardSurface2SG_BaseColor
+    second: {fileID: 2800000, guid: 3e423d05e726b004a8bc2f3a8524e265, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
