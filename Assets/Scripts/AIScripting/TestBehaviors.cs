@@ -8,8 +8,9 @@ using System.Collections;
 public class TestBehaviors : MonoBehaviour
 {
     //referenced from Ezzerland May 16,2011
+    [SerializeField] private float throwStrength = 2;
 
-
+    private bool isThrowing = false;
     //Inspector initiated variables. Defaults are set for ease of use.
 
     public bool on = true; //Is the AI active? this can be used to place pre-set enemies in you scene.
@@ -120,11 +121,31 @@ public class TestBehaviors : MonoBehaviour
 
     private bool canThrow = false;
 
-    private bool holdingBall = false;
+    private bool holdingBall_useProperty = false;
+
+    private bool HoldingBall
+    {
+        get { return holdingBall_useProperty; }
+        set
+        {
+            holdingBall_useProperty = value;
+            anim.SetBool("isHolding", holdingBall_useProperty);
+
+            rbBall.isKinematic = holdingBall_useProperty;
+
+            if (holdingBall_useProperty)
+            {
+                rbBall.transform.position = hand.transform.position;
+                rbBall.transform.SetParent(hand.transform);
+            }
+            else
+            {  
+                rbBall.transform.SetParent(null);
+            }
+        }
+    }
 
     private float playerDistance;
-
-    private Vector3 throwDirection;
 
     private Rigidbody rbBall;
 
@@ -151,42 +172,20 @@ public class TestBehaviors : MonoBehaviour
     {
         playerDistance = Vector3.Distance(target.position, transform.position);
 
-        throwDirection = target.transform.position;
+        //throwDirection = target.transform.position;
         rbBall = ball.GetComponent<Rigidbody>();
         anim = gameObject.GetComponent<Animator>();
 
         ballTagSwitch = ball.tag;
-
-
-        StartCoroutine(Initialize()); //co-routine is used incase you need to interupt initiialization until something else is done.
-
-    }
-
-
-
-    IEnumerator Initialize()
-    {
-
         characterController = gameObject.GetComponent<CharacterController>();
 
         initialGo = true;
-
-        yield return null;
-
     }
-
-
-
-
-
-
 
     //---Main Functionality---//
 
     void Update()
     {
-
-
         if (!on || !initialGo)
         {
 
@@ -198,17 +197,10 @@ public class TestBehaviors : MonoBehaviour
 
             float distance = Vector3.Distance(ball.transform.position, ballPosition.transform.position);
 
-            if (distance <= lookRadius)
+            if (distance <= lookRadius && !HoldingBall)
             {
-
-                holdingBall = true;
-                StartCoroutine(PickUp());
-
-
-
-            }
-            if (holdingBall == true)
-            {
+              
+                HoldingBall = true;
                 StartCoroutine(Throw());
 
             }
@@ -393,13 +385,6 @@ public class TestBehaviors : MonoBehaviour
 
                 }
 
-                if (/*Time.time > lastShotFired + attackTime*/ holdingBall == true)
-                {
-
-                    //StartCoroutine(Throw());
-
-                }
-
             }
 
 
@@ -434,49 +419,29 @@ public class TestBehaviors : MonoBehaviour
 
     IEnumerator Throw()
     {
+        isThrowing = true;
+
+        
+
         transform.LookAt(target);
 
-         
-
-        int random = Random.Range(0,ballEndPosition.Length);
+        //int random = Random.Range(0,ballEndPosition.Length);
 
 
         anim.SetBool("run", false);
+     
+        //todo possibly make random number from min to max and fix magic number(delay variable)
+        yield return new WaitForSeconds(3f);
+        HoldingBall = false;
 
-        ball.transform.position = hand.transform.position;
+        var throwDirection = (target.position - rbBall.position).normalized;
+        rbBall.AddForce(throwDirection * throwStrength, ForceMode.VelocityChange);
 
-        yield return new WaitForSeconds(7f);
+        anim.SetTrigger("throw");
+        yield return new WaitForSeconds(1f);
 
-        Transform t = ball.GetComponent<Transform>();
-        Vector3 originalPosition = t.position;
-        float counter = 0f;
-        anim.Play("ThrowBall");
-        while (counter < 10f)
-        {
-
-            t.position = Vector3.Lerp(t.position, ballEndPosition[random].position, counter);
-            counter += Time.deltaTime;
-
-            yield return 0;
-        }
-        anim.SetBool("idle", true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        isThrowing = false;  
+        //anim.SetBool("idle", true);
     }
 
 
@@ -484,39 +449,7 @@ public class TestBehaviors : MonoBehaviour
 
     //attack stuff...
 
-    IEnumerator PickUp()
-    {
-
-
-
-        holdingBall = true;
-
-        
-
-        Debug.Log("AI picked up ball.");
-
-
-        if (holdingBall == true)
-        {
-            canThrow = true;
-            // ballTagSwitch = "AIBall";
-
-
-            ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            ball.GetComponent<Rigidbody>().useGravity = false;
-            ball.transform.SetParent(hand.transform);
-
-            anim.SetBool("isHolding", true);
-
-        }
-
-
-        else { canThrow = false; holdingBall = false; }
-
-        yield return new WaitForSeconds(1.5f);
-    }
-
+    /*
     IEnumerator Dodge()
     {
         holdingBall = false;
@@ -535,7 +468,7 @@ public class TestBehaviors : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
     }
-
+    */
 
 
 
@@ -892,6 +825,7 @@ public class TestBehaviors : MonoBehaviour
 
 
         characterController.Move(direction * Time.deltaTime);
+        Debug.Log(characterController.velocity.magnitude);
 
     }
 

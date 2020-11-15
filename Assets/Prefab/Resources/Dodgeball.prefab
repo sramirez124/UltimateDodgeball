@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4115816982931476468
+--- !u!1 &2534470617437389153
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4115816982931475979}
-  - component: {fileID: 4115816982931475976}
-  - component: {fileID: 4115816982931475977}
-  - component: {fileID: 4115816982931476470}
-  - component: {fileID: 4115816982931475978}
-  - component: {fileID: 4115816982931475981}
-  - component: {fileID: 4115816982931476471}
+  - component: {fileID: 2534470617437388958}
+  - component: {fileID: 2534470617437388957}
+  - component: {fileID: 2534470617437388956}
+  - component: {fileID: 2534470617437389155}
+  - component: {fileID: 2534470617437388959}
+  - component: {fileID: 2534470617437388952}
+  - component: {fileID: 2534470617437389154}
   m_Layer: 0
-  m_Name: Dodgeball
+  m_Name: Dodgeball 1
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4115816982931475979
+--- !u!4 &2534470617437388958
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.3, y: 1, z: -13.2}
+  m_LocalPosition: {x: 2.16, y: 41, z: -47.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4115816982931475976
+--- !u!33 &2534470617437388957
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4115816982931475977
+--- !u!23 &2534470617437388956
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,26 +83,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4115816982931476470
+--- !u!135 &2534470617437389155
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   m_Material: {fileID: 13400000, guid: c9fc415e44260334092e1c5e94b8b018, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.65067196
   m_Center: {x: 0.0023088455, y: 0, z: 0}
---- !u!54 &4115816982931475978
+--- !u!54 &2534470617437388959
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -112,41 +112,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &4115816982931475981
+--- !u!114 &2534470617437388952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42d481830f5126c48a54efa0ec6a1ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwforce: 50
+  throwforce: 500
+  downScale: 50
+  canHold: 1
+  item: {fileID: 2534470617437389153}
+  tempParent: {fileID: 0}
+  tempAI: {fileID: 0}
+  isHolding: 0
   outOfBoundsColliderBlue: {fileID: 0}
   outOfBoundsColliderRed: {fileID: 0}
   blueSpawn: {fileID: 0}
   redSpawn: {fileID: 0}
-  downScale: 50
-  canHold: 1
-  item: {fileID: 4115816982931476468}
-  tempParent: {fileID: 0}
-  isHolding: 0
   holdText: {fileID: 0}
---- !u!114 &4115816982931476471
+--- !u!114 &2534470617437389154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4115816982931476468}
+  m_GameObject: {fileID: 2534470617437389153}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 120a5c374035ee1409127e30af2baaeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testDummy: {fileID: 0}
+  PlayerSpawn: {fileID: 0}
+  aiSpawn: {fileID: 0}
+  aiNextMove: {fileID: 0}
   scoreText: {fileID: 0}
   hitPlayer: 0

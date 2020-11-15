@@ -277,9 +277,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: throw
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isHolding
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5899043479653479982}
   m_Solo: 0
@@ -519,10 +516,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: idle
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 417832186905299223}
   m_Solo: 0

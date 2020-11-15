@@ -49,17 +49,17 @@ public class HitDetection : MonoBehaviour
         if (hit.collider.tag == "AITest")
         {
             scoreText.text = (hitPlayer + 1).ToString();
-            testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiSpawn.position,Time.deltaTime);
+            //testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiSpawn.position,Time.deltaTime);
 
 
             StartCoroutine(Wait());
-
+            /*
             if(testDummy.transform.position == aiSpawn.position)
             {
                 testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiNextMove.position,Time.deltaTime);
 
             }
-
+            */
             
 ;
 
