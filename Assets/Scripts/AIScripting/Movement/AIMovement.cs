@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class AIMovement : MonoBehaviour
 {
-
     [SerializeField] private float groundDetectRange = 2f;
     [SerializeField] private float pickUpRange = .1f;
 
