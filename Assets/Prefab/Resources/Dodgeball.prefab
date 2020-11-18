@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 2534470617437388959}
   - component: {fileID: 2534470617437388952}
   - component: {fileID: 2534470617437389154}
-  m_Layer: 0
-  m_Name: Dodgeball 1
+  m_Layer: 10
+  m_Name: Dodgeball
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

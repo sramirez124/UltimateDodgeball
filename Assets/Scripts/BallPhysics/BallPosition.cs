@@ -31,6 +31,7 @@ public class BallPosition : MonoBehaviour
 
     [SerializeField] private GameObject blueSpawn;
     [SerializeField] private GameObject redSpawn;
+    [SerializeField] private Transform middleSpawn;
 
     public Text holdText;
 
@@ -110,7 +111,7 @@ public class BallPosition : MonoBehaviour
         if (collision.collider.tag == "BlueReturn")
         {
             Debug.Log("Blue return hit");
-            this.transform.position = new Vector3(blueSpawn.transform.position.x, blueSpawn.transform.position.y, blueSpawn.transform.position.z);
+            this.transform.position = middleSpawn.position;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             
@@ -119,7 +120,7 @@ public class BallPosition : MonoBehaviour
         if (collision.collider.tag == "RedReturn")
         {
             Debug.Log("Red return hit");
-            this.transform.position = new Vector3(redSpawn.transform.position.x, redSpawn.transform.position.y, redSpawn.transform.position.z);
+            this.transform.position = middleSpawn.position;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }

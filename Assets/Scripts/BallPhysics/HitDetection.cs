@@ -35,8 +35,9 @@ public class HitDetection : MonoBehaviour
             //scoreText.text = (hitPlayer + 1).ToString();
             
             player.transform.position = PlayerSpawn.position;
-            Destroy(GetComponent<GameObject>());
-            StartCoroutine(Wait());
+
+            //Destroy(GetComponent<GameObject>());
+           //StartCoroutine(Wait());
 
 
 
@@ -52,7 +53,7 @@ public class HitDetection : MonoBehaviour
             //testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiSpawn.position,Time.deltaTime);
 
 
-            StartCoroutine(Wait());
+            //StartCoroutine(Wait());
             /*
             if(testDummy.transform.position == aiSpawn.position)
             {

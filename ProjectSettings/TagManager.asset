@@ -9,6 +9,8 @@ TagManager:
   - Ball
   - Waypoint
   - Hand
+  - BlueReturn
+  - RedReturn
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - Ground
   - Player
-  - 
+  - Ball
   - 
   - 
   - 
