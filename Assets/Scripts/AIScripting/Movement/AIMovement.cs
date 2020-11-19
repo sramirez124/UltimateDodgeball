@@ -34,10 +34,19 @@ public class AIMovement : MonoBehaviour
     public GameObject projectile;
     private Animation attackAnimation;
 
+    //Audio
+    public AudioSource audioSource;
+    [SerializeField] private AudioClip[] footsteps;
+    [SerializeField] private AudioClip ballWhoosh;
 
     //States
     public float sightRange, attackRange;
     public bool isPlayerInSightRange, isPlayerInAttackRange;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Awake()
     {
@@ -64,6 +73,10 @@ public class AIMovement : MonoBehaviour
             if (!isPlayerInSightRange && !isPlayerInAttackRange) Patroling();
             if (isPlayerInSightRange && !isPlayerInAttackRange) ChasePlayer();
             if (isPlayerInAttackRange && isPlayerInSightRange) AttackPlayer();
+
+            audioSource.volume = 1f;
+            if (audioSource.isPlaying == false)
+                audioSource.PlayOneShot(footsteps[Random.Range(0, footsteps.Length)]);
         }
         else
         {
@@ -76,6 +89,9 @@ public class AIMovement : MonoBehaviour
             {
                 MoveToNearestBall();
             }
+            audioSource.volume = 1f;
+            if (audioSource.isPlaying == false)
+                audioSource.PlayOneShot(footsteps[Random.Range(0, footsteps.Length)]);
         }
 
     }
@@ -130,7 +146,7 @@ public class AIMovement : MonoBehaviour
             agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
+  
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             isWalkPointSet = false;
@@ -142,7 +158,6 @@ public class AIMovement : MonoBehaviour
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
         if (Physics.Raycast(walkPoint, -transform.up, groundDetectRange, whatIsGround))
             isWalkPointSet = true;
     }
@@ -164,6 +179,8 @@ public class AIMovement : MonoBehaviour
         closestBall.AddForce(transform.forward * 32f, ForceMode.Impulse);
         closestBall.AddForce(transform.up, ForceMode.Impulse);
         isHoldingBall = false;
+        audioSource.volume = 0.7f;
+        audioSource.PlayOneShot(ballWhoosh);
 
         //alreadyAttacked = true;
         //Invoke(nameof(ResetAttack), timeBetweenAttacks);

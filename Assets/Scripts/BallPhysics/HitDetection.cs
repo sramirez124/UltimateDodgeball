@@ -16,13 +16,17 @@ public class HitDetection : MonoBehaviour
     public int hitPlayer = 0;
 
     public Random rnd;
-    
 
-   public void Start()
+    public AudioSource audioSource;
+    [SerializeField] private AudioClip[] ballHit;
+
+
+    public void Start()
     {
 
         testDummy = GameObject.FindGameObjectWithTag("AITest");
         player = GameObject.FindGameObjectWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
 
 
     }
@@ -32,6 +36,8 @@ public class HitDetection : MonoBehaviour
     {
         if (hit.collider.tag == "Player")
         {
+            audioSource.volume = 10.0f;
+            audioSource.PlayOneShot(ballHit[Random.Range(0, ballHit.Length)]);
             //scoreText.text = (hitPlayer + 1).ToString();
             
             player.transform.position = PlayerSpawn.position;
@@ -49,6 +55,8 @@ public class HitDetection : MonoBehaviour
 
         if (hit.collider.tag == "AITest")
         {
+            audioSource.volume = 10.0f;
+            audioSource.PlayOneShot(ballHit[Random.Range(0, ballHit.Length)]);
             scoreText.text = (hitPlayer + 1).ToString();
             //testDummy.transform.position = Vector3.Lerp(testDummy.transform.position, aiSpawn.position,Time.deltaTime);
 

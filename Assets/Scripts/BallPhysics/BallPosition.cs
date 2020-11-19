@@ -35,7 +35,13 @@ public class BallPosition : MonoBehaviour
 
     public Text holdText;
 
-     
+    public AudioSource audioSource;
+    [SerializeField] private AudioClip ballWhoosh;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void Update()
     {
         
@@ -57,15 +63,17 @@ public class BallPosition : MonoBehaviour
             item.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             item.GetComponent<Rigidbody>().useGravity = false;
             item.transform.SetParent(tempParent.transform);
+            
 
-
-            if(Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1))
             {
                 item.GetComponent<Rigidbody>().AddForce(tempParent.transform.forward * throwforce);
                  isHolding = false;
                 item.GetComponent<Rigidbody>().AddForce(Vector3.down * downScale);
                 //holdText.text = "Ball was Thrown...";
                 Debug.Log("Ball Thrown");
+                audioSource.volume = .5f;
+                audioSource.PlayOneShot(ballWhoosh);
 
             }
         }
@@ -102,8 +110,8 @@ public class BallPosition : MonoBehaviour
     void OnMouseUp()
     {
 
-        isHolding = false;
-        
+        isHolding = false; 
+
     }
 
     void OnCollisionEnter(Collision collision)
