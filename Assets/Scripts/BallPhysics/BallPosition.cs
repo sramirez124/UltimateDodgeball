@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BallPosition : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class BallPosition : MonoBehaviour
     [SerializeField] private GameObject blueSpawn;
     [SerializeField] private GameObject redSpawn;
     [SerializeField] private Transform middleSpawn;
+    [SerializeField] private Transform blueBallSpawn;
+    [SerializeField] private Transform redBallSpawn;
+    private HitDetection hitScript;
+    int hitPlayer = 0;
 
     public Text holdText;
 
@@ -41,6 +46,7 @@ public class BallPosition : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        hitScript = new HitDetection();
     }
     public void Update()
     {
@@ -119,18 +125,21 @@ public class BallPosition : MonoBehaviour
         if (collision.collider.tag == "BlueReturn")
         {
             Debug.Log("Blue return hit");
-            this.transform.position = middleSpawn.position;
+            this.transform.position = redBallSpawn.position;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
             
         }
 
         if (collision.collider.tag == "RedReturn")
         {
             Debug.Log("Red return hit");
-            this.transform.position = middleSpawn.position;
+            this.transform.position = blueBallSpawn.position;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            hitScript.scoreText.text = (hitPlayer + 1).ToString();
+
         }
     }
 }

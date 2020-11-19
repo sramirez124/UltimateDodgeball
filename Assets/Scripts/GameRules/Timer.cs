@@ -20,6 +20,6 @@ public class Timer : MonoBehaviour
     public void Update()
     {
         playedTime += Time.deltaTime;
-        timeCounter.text = playedTime.ToString();
+        //timeCounter.text = playedTime.ToString();
     }
 }

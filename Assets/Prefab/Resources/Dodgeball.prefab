@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6f5cda37c377c614eb9a5f5559ea2ab7, type: 2}
+  - {fileID: 2100000, guid: 15d6b00084cfd2a45867678a694d4d2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,7 +135,10 @@ MonoBehaviour:
   outOfBoundsColliderRed: {fileID: 0}
   blueSpawn: {fileID: 0}
   redSpawn: {fileID: 0}
+  middleSpawn: {fileID: 0}
   holdText: {fileID: 0}
+  audioSource: {fileID: 0}
+  ballWhoosh: {fileID: 0}
 --- !u!114 &2534470617437389154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +156,5 @@ MonoBehaviour:
   aiNextMove: {fileID: 0}
   scoreText: {fileID: 0}
   hitPlayer: 0
+  audioSource: {fileID: 0}
+  ballHit: []
