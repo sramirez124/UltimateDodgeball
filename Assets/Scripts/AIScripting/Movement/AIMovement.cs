@@ -22,6 +22,8 @@ public class AIMovement : MonoBehaviour
     private bool isBallInSightRange;
     private Rigidbody[] allBalls;
     private Rigidbody closestBall;
+    private Animator animAI;
+    float distanceBetweenBallAI;
 
     //Patroling
     public Vector3 walkPoint;
@@ -45,25 +47,34 @@ public class AIMovement : MonoBehaviour
 
     void Start()
     {
+        
         audioSource = GetComponent<AudioSource>();
+        
     }
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        animAI = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         attackAnimation = GetComponent<Animation>();
         var balls = GameObject.FindGameObjectsWithTag("Ball");
         allBalls = new Rigidbody[balls.Length];
+
         for (int i = 0; i < balls.Length; i++)
         {
             allBalls[i] = balls[i].GetComponent<Rigidbody>();
         }
         closestBall = FindClosestBall();
+
+        
+        
     }
 
     private void Update()
     {
+        distanceBetweenBallAI = Vector3.Distance(this.transform.position, closestBall.transform.position);
+        animAI.SetFloat("DistanceFromBall", distanceBetweenBallAI);
         //todo if AI holding ball and !inattackRange the AI doesn't know what to do
         if (isHoldingBall)
         {
@@ -125,6 +136,7 @@ public class AIMovement : MonoBehaviour
         }
         else
         {
+            animAI.SetBool("isHolding", false);
             agent.SetDestination(FindClosestBall().transform.position);
         }
     }
@@ -135,6 +147,7 @@ public class AIMovement : MonoBehaviour
         closestBall.transform.position = hand.position;
         closestBall.transform.SetParent(hand);
         isHoldingBall = true;
+        animAI.SetBool("isHolding", true);
         Debug.Log("Picked up ball.");
     }
 
@@ -171,8 +184,9 @@ public class AIMovement : MonoBehaviour
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-
+        
         transform.LookAt(player);
+        animAI.SetTrigger("Throw");
 
         closestBall.isKinematic = false;
         closestBall.transform.SetParent(null);
@@ -181,6 +195,8 @@ public class AIMovement : MonoBehaviour
         isHoldingBall = false;
         audioSource.volume = 0.7f;
         audioSource.PlayOneShot(ballWhoosh);
+
+        
 
         //alreadyAttacked = true;
         //Invoke(nameof(ResetAttack), timeBetweenAttacks);
