@@ -11,7 +11,7 @@ public class MouseControl : MonoBehaviour {
     float xRotate = 0f;
 	// Use this for initialization
 	void Start () {
-
+        if(!PauseMenu.isPaused)
         Cursor.lockState = CursorLockMode.Locked;
 		
 	}

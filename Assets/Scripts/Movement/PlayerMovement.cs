@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
        // if (photonView.IsMine)
        // {
+       if(!PauseMenu.isPaused)
             takeInput();
 
             
